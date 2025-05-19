@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.13"
+    "@auth/core": "^0.37.4",
+    "astro": "^5.7.13",
+    "auth-astro": "^4.2.0"
   }
 }
