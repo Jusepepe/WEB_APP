@@ -1,9 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-import auth from 'auth-astro';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [auth()]
+  devToolbar: {
+      enabled: false, // Desactiva la barra de herramientas de desarrollo
+    },
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
