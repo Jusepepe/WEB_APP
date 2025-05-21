@@ -21,6 +21,8 @@ export default defineConfig({
     appearance: {
         baseTheme: dark,
     },
+    afterSignInUrl: "/dashboard",
+    afterSignUpUrl: "/dashboard",
   })],
   adapter: node({ mode: "standalone" }),
   output: "server",
