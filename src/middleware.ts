@@ -8,4 +8,4 @@ export const onRequest = clerkMiddleware((auth, context) => {
     if (!userId && isProtectedRoute(context.request)) {
       return redirectToSignIn()
     }
-  })
+})
