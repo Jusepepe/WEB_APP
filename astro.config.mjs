@@ -7,6 +7,8 @@ import { dark } from '@clerk/themes';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import preact from "@astrojs/preact";
+
 // https://astro.build/config
 export default defineConfig({
   devToolbar: {
@@ -23,7 +25,7 @@ export default defineConfig({
     },
     afterSignInUrl: "/dashboard",
     afterSignUpUrl: "/dashboard",
-  })],
+  }), preact()],
   adapter: node({ mode: "standalone" }),
   output: "server",
 });

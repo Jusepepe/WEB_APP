@@ -1,18 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Sidebar from "../components/Sidebar.astro";
-import Navbar from "../components/Navbar.astro";
+import Timeline from "../components/Timeline.astro";
+import { DaySlider } from "../components/DaySlider.jsx";
+import { Rail } from "../components/Rail.jsx";
 ---
 
 <Layout>
 	<div class="flex h-screen">
 		<Sidebar />
-		<div class="flex flex-col flex-1 dark:bg-gray-800 p-4">
+		<div class="flex flex-col flex-1 dark:bg-gray-800 p-4 gap-4">
 			<div class="p-6 dark:bg-gray-700 rounded-lg">
 				<h1 class="text-2xl font-semibold">Timeline</h1>
 			</div>
-			
-
+			<div class="grid grid-cols-3 p-6 dark:bg-gray-700 rounded-lg gap-4">
+				<div class="flex flex-col col-span-2 w-full">
+					<Rail/>
+				</div>
+				<div class="flex flex-col col-span-1 justify-start gap-4">
+					<DaySlider client:visible/>
+					<Timeline />
+				</div>
+			</div>
 		</div>
 	</div>	
 </Layout>
