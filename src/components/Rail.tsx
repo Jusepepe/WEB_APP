@@ -1,6 +1,11 @@
 import { useState } from "preact/hooks";
 
-const tracePath = [
+type Trace = {
+    name : string,
+    id : number
+}
+
+const tracePath: Trace[] = [
     {name: "Trace 1", id: 1},
     {name: "Trace 2", id: 2},
     {name: "Trace 3", id: 3},
@@ -12,9 +17,11 @@ const tracePath = [
 export function Rail() {
     const [selectedTrace, setSelectedTrace] = useState(tracePath[0]);
     
-    const handleChange = (e) => {
-        setSelectedTrace(tracePath[e.target.value])
+    const handleChange = (e: {currentTarget: HTMLInputElement}) => {
+        const value = parseInt(e.currentTarget.value)
+        setSelectedTrace(tracePath[value])
     }
+
     return (
         <div class="flex flex-col items-center w-full h-full p-2 bg-gray-800 rounded-lg border-6 border-gray-600">
             <label class="text-gray-300">SELECT TRACE</label>

@@ -2,8 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Sidebar from "../components/Sidebar.astro";
 import Timeline from "../components/Timeline.astro";
-import { DaySlider } from "../components/DaySlider.jsx";
-import { Rail } from "../components/Rail.jsx";
+import { DaySlider } from "../components/DaySlider.tsx";
+import { Rail } from "../components/Rail.tsx";
 ---
 
 <Layout>
@@ -21,7 +21,7 @@ import { Rail } from "../components/Rail.jsx";
 					<DaySlider client:load/>
 				</div>
 				<div class="col-start-3 row-start-2">
-					<Timeline />
+					<Timeline/>
 				</div>
 			</div>
 		</div>
