@@ -12,9 +12,19 @@ const tracePath = [
 export function Rail() {
     const [selectedTrace, setSelectedTrace] = useState(tracePath[0]);
     
+    const handleChange = (e) => {
+        setSelectedTrace(tracePath[e.target.value])
+    }
     return (
-        <div class="flex items-center w-full h-16 p-2 bg-gray-800 rounded-lg border-6 border-gray-600">
-            <input type="range" value={selectedTrace.id} min={1} max={6} class="w-full h-full rounded-lg bg-gray-600 cursor-pointer"/>
+        <div class="flex flex-col items-center w-full h-full p-2 bg-gray-800 rounded-lg border-6 border-gray-600">
+            <label class="text-gray-300">SELECT TRACE</label>
+            <input type="range" onChange={handleChange} min={0} max={5} class="w-full h-full rounded-lg bg-gray-600 cursor-pointer" list="traceList"/>
+            <datalist id="traceList">
+                {tracePath.map((trace) => (
+                    <option value={trace.id-1} />
+                ))}
+            </datalist>
+            <span class="text-gray-300">{selectedTrace.name}</span>
         </div>
     );
 }
