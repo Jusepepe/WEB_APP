@@ -3,18 +3,19 @@ import Layout from "../layouts/Layout.astro";
 import Sidebar from "../components/Sidebar.astro";
 import { Timeline } from "../components/Timeline.tsx";
 import { DaySlider } from "../components/DaySlider.tsx";
-import { Rail } from "../components/Rail.tsx";
 import { ImageLayout } from "../components/ImageLayout.tsx";
+import { TracePicker } from "../components/TracePicker.tsx";
 ---
 
 <Layout>
-	<div class="flex flex-row justify-between h-full gap-1.5 p-2">
-		<Sidebar />
-		<article class="bg-gray-100 rounded-lg p-2">
-			<Rail client:load/>
+	<div class="flex flex-row justify-between w-full h-full gap-1.5 p-2">
+		<Sidebar/>
+		<article class="flex flex-col gap-2 w-[53%] h-full bg-gray-100 rounded-lg py-2 px-4 overflow-y-auto no-scrollbar">
+			<TracePicker client:load/>
+			<ImageLayout/>
 			<ImageLayout/>
 		</article>
-		<section class="flex flex-col gap-2 bg-white p-2">
+		<section class="flex flex-col gap-2 w-[27%] h-full bg-white p-2">
 			<DaySlider client:load/>
 			<Timeline client:load/>
 		</section>

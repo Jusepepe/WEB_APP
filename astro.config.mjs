@@ -6,7 +6,7 @@ import clerk from "@clerk/astro";
 
 import tailwindcss from '@tailwindcss/vite';
 
-import preact from "@astrojs/preact";
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,7 +21,8 @@ export default defineConfig({
   integrations: [clerk({
     afterSignInUrl: "/dashboard",
     afterSignUpUrl: "/dashboard",
-  }), preact()],
+  }), react()],
   adapter: node({ mode: "standalone" }),
   output: "server",
+
 });

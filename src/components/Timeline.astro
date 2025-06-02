@@ -26,7 +26,7 @@ const timeline = [
   {time: "6 PM", color: "bg-blue-400"},
 ]
 ---
-<ul class="flex flex-col gap-2 h-full overflow-y-auto overflow-x-hidden w-full">
+<ul class="flex flex-col gap-2 h-full overflow-y-auto overflow-x-hidden w-full no-scrollbar">
     {timeline.map((item, index) => (
       <TimeEvent client:load time={item.time} color={item.color} image={imageUrls[index]} index={index}/>
     ))}

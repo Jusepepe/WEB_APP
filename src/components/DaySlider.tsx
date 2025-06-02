@@ -1,5 +1,4 @@
 import { useState } from "preact/hooks";
-import { LeftArrow, RightArrow } from "./Arrows.tsx";
 import { DayButton } from "./DayButton.tsx";
 
 const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];

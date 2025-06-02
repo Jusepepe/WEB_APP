@@ -60,9 +60,9 @@ export function Timeline() {
         }
     }
     return (
-        <ul class="flex flex-col gap-2 h-full overflow-y-auto w-full">
+        <ul class="flex flex-col gap-2 h-full overflow-y-auto overflow-x-clip no-scrollbar">
             {timeline.map((item, index) => (
-                <TimeEvent key={index} time={item.time} color={item.color} image={imagesrc[index].src} index={index} selected={selected === index} setSelected={handleClick}/>
+                <TimeEvent key={index} {...item} image={imagesrc[index].src} index={index} selected={selected === index} setSelected={handleClick}/>
             ))}
         </ul>
     )
