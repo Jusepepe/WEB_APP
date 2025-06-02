@@ -4,12 +4,12 @@ const color = Astro.props.color
 const image = Astro.props.image
 const index = Astro.props.index
 ---
-<section class="flex flex-row items-center gap-2">
-    <button class={`h-3 w-3 ${color} rounded-full hover:border-2 hover:border-blue-300 hover:scale-150 hover:cursor-pointer`} >
+<li class="flex flex-row items-center gap-2 hover:cursor-pointer hover:scale-105 transition-all duration-200 hover:bg-gray-600 p-4">
+    <button class={`h-3 w-3 ${color} rounded-full`} >
     </button>
     <img class="w-28 h-20 rounded-lg" src={image} alt={`Slide ${index + 1}`} />
     <div>
         <h1>{time}</h1>
         <p class="text-gray-300">Premade Trace</p>
     </div>
-</section>
+</li>

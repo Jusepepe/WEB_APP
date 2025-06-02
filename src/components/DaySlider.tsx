@@ -15,21 +15,19 @@ export function DaySlider() {
     }
     
     return (
-        <>
-            <h1 class="text-gray-300 font-semibold text-xl">{monthNames[day.getMonth()]}</h1>
-            <nav class="flex flex-row bg-gray-800 rounded-lg">
-                <LeftArrow changeDay={changeDay} change={-7}/>
-                <div class="flex flex-row overflow-x-scroll">
+        <section class="flex flex-col gap-2">
+            <h1 class="text-black font-semibold text-xl">{monthNames[day.getMonth()]}</h1>
+            <nav class="flex flex-row bg-white rounded-lg">
+                <div class="flex flex-row overflow-x-auto">
+                    <DayButton day={day} changeDay={changeDay} change={-5} selected={false}/>
+                    <DayButton day={day} changeDay={changeDay} change={-4} selected={false}/>
+                    <DayButton day={day} changeDay={changeDay} change={-3} selected={false}/>
+                    <DayButton day={day} changeDay={changeDay} change={-2} selected={false}/>
                     <DayButton day={day} changeDay={changeDay} change={-1} selected={false}/>
                     <DayButton day={day} changeDay={changeDay} change={0} selected={true}/>
                     <DayButton day={day} changeDay={changeDay} change={1} selected={false}/>
-                    <DayButton day={day} changeDay={changeDay} change={2} selected={false}/>
-                    <DayButton day={day} changeDay={changeDay} change={3} selected={false}/>
-                    <DayButton day={day} changeDay={changeDay} change={4} selected={false}/>
-                    <DayButton day={day} changeDay={changeDay} change={5} selected={false}/>
                 </div>
-                <RightArrow changeDay={changeDay} change={7}/>
             </nav>
-        </>
+        </section>
     )
 }

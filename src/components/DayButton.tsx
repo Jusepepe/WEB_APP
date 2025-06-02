@@ -8,9 +8,9 @@ export function DayButton({ changeDay, selected, day, change }: { changeDay: (nu
 
 
     return (
-        <button onClick={() => changeDay(change)} class={`flex flex-col items-center p-2 rounded-lg hover:bg-blue-500 min-w-16 hover:cursor-pointer ${selected ? 'bg-gray-900' : ''}`}>
-            <p class={`text-gray-300 font-semibold text-md ${selected ? 'text-white' : ''}`}>{dayNames[displayDay]}</p>
-            <p class={`text-black font-semibold text-md ${selected ? 'text-gray-300' : ''}`}>{displayDate}</p>
+        <button onClick={() => changeDay(change)} class={`flex flex-col items-center justify-center p-0 rounded-lg min-w-12 h-12 hover:cursor-pointer ${selected ? 'bg-black hover:bg-black' : 'hover:bg-gray-100'}`}>
+            <p class={`text-gray-400 font-semibold text-sm ${selected ? 'text-white' : ''}`}>{dayNames[displayDay]}</p>
+            <p class={`text-black font-semibold text-md ${selected ? 'text-white' : ''}`}>{displayDate}</p>
         </button>
     )
 }

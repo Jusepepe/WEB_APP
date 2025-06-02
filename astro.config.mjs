@@ -3,7 +3,6 @@ import { defineConfig } from 'astro/config';
 
 import node from "@astrojs/node";
 import clerk from "@clerk/astro";
-import { dark } from '@clerk/themes';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -20,9 +19,6 @@ export default defineConfig({
   },
 
   integrations: [clerk({
-    appearance: {
-        baseTheme: dark,
-    },
     afterSignInUrl: "/dashboard",
     afterSignUpUrl: "/dashboard",
   }), preact()],

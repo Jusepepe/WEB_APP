@@ -1,29 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Sidebar from "../components/Sidebar.astro";
-import Timeline from "../components/Timeline.astro";
+import { Timeline } from "../components/Timeline.tsx";
 import { DaySlider } from "../components/DaySlider.tsx";
 import { Rail } from "../components/Rail.tsx";
+import { ImageLayout } from "../components/ImageLayout.tsx";
 ---
 
 <Layout>
-	<div class="flex h-screen">
+	<div class="flex flex-row justify-between h-full gap-1.5 p-2">
 		<Sidebar />
-		<div class="flex flex-col flex-1 dark:bg-gray-800 p-4 gap-4">
-			<div class="p-6 dark:bg-gray-700 rounded-lg">
-				<h1 class="text-2xl font-semibold">Timeline</h1>
-			</div>
-			<div class="grid grid-cols-3 grid-rows-[auto_1fr] p-6 dark:bg-gray-700 rounded-lg gap-4">
-				<div class="flex flex-col col-span-2 row-span-1 w-full h-full">
-					<Rail client:load/>
-				</div>
-				<div class="col-span-1 row-span-1 h-full">
-					<DaySlider client:load/>
-				</div>
-				<div class="col-start-3 row-start-2">
-					<Timeline/>
-				</div>
-			</div>
-		</div>
+		<article class="bg-gray-100 rounded-lg p-2">
+			<Rail client:load/>
+			<ImageLayout/>
+		</article>
+		<section class="flex flex-col gap-2 bg-white p-2">
+			<DaySlider client:load/>
+			<Timeline client:load/>
+		</section>
 	</div>	
 </Layout>

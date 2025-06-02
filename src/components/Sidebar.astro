@@ -1,38 +1,46 @@
 ---
 import { SignedIn, UserButton } from "@clerk/astro/components";
+import NavbarButton from "./NavbarButton.astro";
+import HomeIcon from "../assets/icons/HomeIcon.astro";
+import DetectionIcon from "../assets/icons/DetectionIcon.astro";
+import HistoryIcon from "../assets/icons/HistoryIcon.astro";
 ---
-<aside class="flex min-h-screen">
-    <nav class="w-64 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-        <div class="p-6">
-            <div class="flex items-center justify-between mb-8">
-                <h2 class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Citric AI</h2>
-                <SignedIn>
-                    <UserButton />
-                </SignedIn>
-            </div>
-            
-            <div class="space-y-1">
-                <a href="/dashboard" class="flex items-center px-4 py-3 text-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                    <span>Dashboard</span>
-                </a>
-                
-                <a href="/detection" class="flex items-center px-4 py-3 text-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    <span>Detection</span>
-                </a>
-                
-                <a href="/history" class="flex items-center px-4 py-3 text-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <span>History</span>
-                </a>
-            </div>
-        </div>
+<aside class="flex flex-col w-3/6 h-full gap-4 bg-gray-100 px-2 py-4 rounded-lg">
+    <h2 class="text-2xl font-semibold whitespace-nowrap text-black">Citric AI</h2>
+    <div class="flex items-center justify-center">
+        <SignedIn>
+            <UserButton appearance={
+                    {
+                        elements: {
+                        avatarBox: {
+                            width: '4rem',
+                            height: '4rem',
+                            borderRadius: '20%',
+                            border: '2px solid #ccc',
+                            },
+                        userButtonAvatarImage: {
+                            width: '4rem',
+                            height: '4rem',
+                            aspectRatio: '1/1',
+                            objectFit: 'cover',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            padding: '0',
+                            }
+                    },
+                }
+        }/>
+    </SignedIn>
+    </div>
+    <nav class="flex flex-col justify-start gap-1 h-full">
+        <NavbarButton href="/dashboard" name="Dashboard">
+            <HomeIcon/>
+        </NavbarButton>
+        <NavbarButton href="/detection" name="Detection">
+            <DetectionIcon/>
+        </NavbarButton>
+        <NavbarButton href="/history" name="History">
+            <HistoryIcon/>
+        </NavbarButton>
     </nav>
 </aside>

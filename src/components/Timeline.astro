@@ -26,15 +26,8 @@ const timeline = [
   {time: "6 PM", color: "bg-blue-400"},
 ]
 ---
-<div class="flex flex-row gap-2 justify-start">
-  <div class="w-2 h-full bg-blue-600 rounded-full">
-    
-  </div>
-  <ul class="flex flex-col -translate-x-4 w-full gap-2">
+<ul class="flex flex-col gap-2 h-full overflow-y-auto overflow-x-hidden w-full">
     {timeline.map((item, index) => (
-      <li class="w-full">
-        <TimeEvent time={item.time} color={item.color} image={imageUrls[index]} index={index}/>
-      </li>
+      <TimeEvent client:load time={item.time} color={item.color} image={imageUrls[index]} index={index}/>
     ))}
-  </ul>
-</div>
+</ul>
