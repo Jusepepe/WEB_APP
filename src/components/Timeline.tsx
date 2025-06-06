@@ -1,7 +1,5 @@
 import { TimeEvent } from "./TimeEvent.tsx";
-import { useState } from "preact/hooks";
-import results0 from "../../public/images/muestras/results0.jpg";
-import results1 from "../../public/images/muestras/results1.jpg"
+import { useUserStore } from "../store/userStore.tsx";
 
 type TimelineEvent = {
     time: string,
@@ -24,22 +22,6 @@ const imageUrls : string[] = [
     'https://picsum.photos/300/200?random=13', 
 ];
 
-const imagesrc : ImageMetadata[] = [
-    results0,
-    results1,
-    results0,
-    results1,
-    results0,
-    results1,
-    results0,
-    results1,
-    results0,
-    results0,
-    results1,
-    results0,
-    results1,
-]
-
 const timeline: TimelineEvent[] = [
     {time: "6 AM", color: "bg-gray-400"},
     {time: "8 AM", color: "bg-gray-400"},
@@ -51,18 +33,18 @@ const timeline: TimelineEvent[] = [
 ]
 
 export function Timeline() {
-    const [selected, setSelected] = useState(-1)
+    const { setSelectedEvent , selectedEvent} = useUserStore()
 
     const handleClick = (index: number) => {
-        setSelected(index)
-        if (index === selected) {
-            setSelected(-1)
+        setSelectedEvent(index)
+        if (index === selectedEvent) {
+            setSelectedEvent(-1)
         }
     }
     return (
-        <ul class="flex flex-col gap-2 h-full overflow-y-auto overflow-x-clip no-scrollbar">
+        <ul className="flex flex-col gap-2 h-full overflow-y-auto overflow-x-clip no-scrollbar">
             {timeline.map((item, index) => (
-                <TimeEvent key={index} {...item} image={imagesrc[index].src} index={index} selected={selected === index} setSelected={handleClick}/>
+                <TimeEvent key={index} {...item} image={imageUrls[index]} index={index} selected={selectedEvent === index} setSelected={handleClick}/>
             ))}
         </ul>
     )

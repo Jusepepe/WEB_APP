@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Sidebar from "../components/Sidebar.astro";
+
+---
+
+<Layout>
+    <div class="flex flex-row justify-start w-full h-full gap-1.5 p-2">
+		<Sidebar/>
+		<form class="flex flex-col gap-2 w-[53%] h-full bg-gray-100 rounded-lg py-2 px-4 overflow-y-auto no-scrollbar" method="POST" action="http://23.22.129.201/image_json" target="_blank" enctype="multipart/form-data">
+            <h1>Detección</h1>
+            <input type="file" name="file" id="file" accept="image/*"/>
+            <button class="bg-gray-400 rounded-lg p-2 text-black hover:bg-gray-500 hover:text-white" type="submit">Enviar</button>            
+        </form>
+
+	</div>	
+</Layout>
