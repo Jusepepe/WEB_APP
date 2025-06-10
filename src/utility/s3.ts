@@ -1,11 +1,14 @@
 import { S3Client, ListObjectsV2Command } from "@aws-sdk/client-s3";
 
+const AWS_BUCKET_NAME = "citric-bucket"
+const AWS_REGION = "us-east-1"
+
 interface S3Credentials {
     AWS_ACCESS_KEY_ID: string;
     AWS_SECRET_ACCESS_KEY: string;
 }
 
-const credentials = (): S3Credentials => {
+const getCredentials = (): S3Credentials => {
     const {
         AWS_ACCESS_KEY_ID,
         AWS_SECRET_ACCESS_KEY,
@@ -19,10 +22,10 @@ const credentials = (): S3Credentials => {
     }
 }
 
-const createS3Client = () => {
-    const { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = credentials();
+const createS3Client = (): S3Client => {
+    const { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = getCredentials();
     return new S3Client({
-        region: "us-east-1",
+        region: AWS_REGION,
         credentials: {
             accessKeyId: AWS_ACCESS_KEY_ID,
             secretAccessKey: AWS_SECRET_ACCESS_KEY,
@@ -30,19 +33,23 @@ const createS3Client = () => {
     });
 }
 
-const s3: S3Client = createS3Client();
-
 export function getPublicUrl(key: string): string {
-    return `https://citric-bucket.s3.us-east-1.amazonaws.com/${encodeURIComponent(key)}`;
+    return `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${encodeURIComponent(key)}`;
 }
 
-export async function listObjectsProcessed() {
+async function listObjects(prefix: string): Promise<Object[]> {
+    const s3= createS3Client();
+    console.log(prefix)
     const command = new ListObjectsV2Command({
-        Bucket: "citric-bucket",
-        Prefix: `2025-06-05 15:00 PM/processed/`
+        Bucket: AWS_BUCKET_NAME,
+        Prefix: prefix
     });
     try {
         const data = await s3.send(command);
+        console.log(data.Contents)
+        if (!data.Contents) {
+            return [];
+        }
         return data.Contents;
     } catch (error) {
         console.log(error);
@@ -50,16 +57,7 @@ export async function listObjectsProcessed() {
     }
 }
 
-export async function listObjectsRaw() {
-    const command = new ListObjectsV2Command({
-        Bucket: "citric-bucket",
-        Prefix: `2025-06-05 15:00 PM/raw/`
-    });
-    try {
-        const data = await s3.send(command);
-        return data.Contents;
-    } catch (error) {
-        console.log(error);
-        return [];
-    }
-}
+export const listObjectsProcessed = (date: string, hour: string) => listObjects(`${date}/processed/${hour}`)
+export const listObjectsRaw = (date: string, hour: string) => listObjects(`${date}/raw/${hour}`)
+export const listObjectsProcessedbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/processed/${hour}/Track_${tracePath}`)
+export const listObjectsRawbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/raw/${hour}/Track_${tracePath}`)

@@ -1,22 +1,31 @@
 import create from "zustand";
+import type { Data } from "../utility/types";
 
 interface State {
     tracePath: number;
     selectedEvent: number;
     day: Date;
+    type: string;
+    objects: Data;
 }
 
 interface Actions{
     setSelectedTrace: (tracePath: number) => void;
     setSelectedEvent: (index: number) => void;
     setDay: (day: Date) => void;
+    setType: (type: string) => void;
+    setObjects: (objects: Data) => void;
 }
 
 export const useUserStore = create<State & Actions>((set) => ({
     tracePath: -1,
     selectedEvent: -1,
     day: new Date(),
+    type: "processed",
+    objects: [],
     setSelectedTrace: (tracePath: number) => set({ tracePath: tracePath }),
     setSelectedEvent: (index: number) => set({ selectedEvent: index }),
     setDay: (day: Date) => set({ day: day }),
+    setType: (type: string) => set({ type: type }),
+    setObjects: (objects: Data) => set({ objects: objects }),
 }))
