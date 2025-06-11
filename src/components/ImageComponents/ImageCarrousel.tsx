@@ -1,10 +1,10 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { ImageBox } from "./ImageBox";
-import { useUserStore } from "../store/userStore";
-import { getPublicUrl } from "../utility/s3";
+import { useUserStore } from "../../store/userStore";
+import { getPublicUrl } from "../../utility/s3";
 import { useEffect } from "react";
 import { ImageBarComp } from "./ImageBarComp";
-import { useS3 } from "../utility/hooks/useS3";
+import { useS3 } from "../../utility/hooks/useS3";
 
 export function ImageCarrousel() {
     const { day, tracePath, type, selectedEvent, objects } = useUserStore()

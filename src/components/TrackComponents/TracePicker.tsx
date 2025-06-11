@@ -1,4 +1,4 @@
-import { useUserStore } from "../store/userStore.tsx";
+import { useUserStore } from "../../store/userStore.tsx";
 import { TracePickerButton } from "./TracePickerButton.tsx";
 
 export function TracePicker() {

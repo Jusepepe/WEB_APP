@@ -1,5 +1,5 @@
 import { DayButton } from "./DayButton.tsx";
-import { useUserStore } from "../store/userStore.tsx";
+import { useUserStore } from "../../store/userStore.tsx";
 
 const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 

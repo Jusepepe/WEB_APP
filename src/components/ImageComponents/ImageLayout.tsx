@@ -1,5 +1,5 @@
 //Importar results0.jpg y results1.jpg  
-import { ImageBox } from "./ImageBox";
+import { ImageBox } from "./ImageComponents/ImageBox";
 import { useUserStore } from "../store/userStore";
 import { getPublicUrl } from "../utility/s3";
 import { useEffect } from "react";

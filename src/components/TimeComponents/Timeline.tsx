@@ -1,6 +1,6 @@
 import { TimeEvent } from "./TimeEvent.tsx";
-import { useUserStore } from "../store/userStore.tsx";
-import { imageUrls, timeline } from "../utility/consts";
+import { useUserStore } from "../../store/userStore.tsx";
+import { imageUrls, timeline } from "../../utility/consts.ts";
 
 export function Timeline() {
     const { setSelectedEvent , selectedEvent } = useUserStore()

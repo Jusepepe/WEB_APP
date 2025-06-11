@@ -1,5 +1,5 @@
-import { Rail } from "./Rail.tsx"
-import { ThreeDots } from "../assets/icons/ThreeDots"
+import { Rail } from "../TrackComponents/Rail.tsx"
+import { ThreeDots } from "../../assets/icons/ThreeDots.tsx"
 
 
 export function ImageBox({src}: {src: string}) {
