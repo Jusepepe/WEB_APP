@@ -15,7 +15,10 @@
 <style is:global>
 	@import "tailwindcss";
 	@utility no-scrollbar {
-    @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+		@apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+	}
+	@utility load-spinner{
+		@apply animate-spin h-5 w-5 border-b-2 border-gray-900 rounded-full;
 	}
 </style>
 

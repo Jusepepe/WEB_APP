@@ -1,13 +1,8 @@
 //Getting date and hour in format 2025-06-05 15:00 PM
-import { useUserStore } from "../store/userStore"
-import { timeline } from "./consts"
+import { timeline } from "../consts"
 
-export function getDateAndHour() {
-    const { day, selectedEvent } = useUserStore()
-    if(selectedEvent === -1) {
-        return formatDateAndHour(day, 0)
-    }
-    return formatDateAndHour(day, selectedEvent)
+export function getDateAndHour(day: Date, selectedEvent: number) {
+    return selectedEvent === -1 ? formatDateAndHour(day, 0) : formatDateAndHour(day, selectedEvent)
 }
 
 function formatDateAndHour(day: Date, selectedEvent: number) {

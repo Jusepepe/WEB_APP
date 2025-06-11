@@ -13,13 +13,13 @@ export const GET: APIRoute = async ({ params, request }) => {
       if(tracePath === "-1") {
         s3Objects = await listObjectsProcessed(date, hour)
       } else {
-        s3Objects = await listObjectsProcessedbyTracePath(date, hour, Number(tracePath)-1)
+        s3Objects = await listObjectsProcessedbyTracePath(date, hour, Number(tracePath))
       }
     } else if(type === "raw") {
       if(tracePath === "-1") {
         s3Objects = await listObjectsRaw(date, hour)
       } else {
-        s3Objects = await listObjectsRawbyTracePath(date, hour, Number(tracePath)-1)
+        s3Objects = await listObjectsRawbyTracePath(date, hour, Number(tracePath))
       }
     }
     

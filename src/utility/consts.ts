@@ -1,31 +1,47 @@
+import type { Data } from "./types"
+
 type TimelineEvent = {
     time: string,
     color: string
 }
 
-export const imageUrls : string[] = [
-    'https://picsum.photos/300/200?random=1',
-    'https://picsum.photos/300/200?random=2',
-    'https://picsum.photos/300/200?random=3',
-    'https://picsum.photos/300/200?random=4',
-    'https://picsum.photos/300/200?random=5',
-    'https://picsum.photos/300/200?random=6',
-    'https://picsum.photos/300/200?random=7',
-    'https://picsum.photos/300/200?random=8',
-    'https://picsum.photos/300/200?random=9', 
-    'https://picsum.photos/300/200?random=10', 
-    'https://picsum.photos/300/200?random=11', 
-    'https://picsum.photos/300/200?random=12', 
-    'https://picsum.photos/300/200?random=13', 
-];
+export const imageUrls = Array.from({length: 24}, (_, i) => `https://picsum.photos/300/200?random=${i+1}`)
 
-export const timeline: TimelineEvent[] = [
-    {time: "6 AM", color: "bg-gray-400"},
-    {time: "8 AM", color: "bg-gray-400"},
-    {time: "10 AM", color: "bg-gray-400"},
-    {time: "12 PM", color: "bg-gray-400"},
-    {time: "2 PM", color: "bg-gray-400"},
-    {time: "3 PM", color: "bg-gray-400"},
-    {time: "4 PM", color: "bg-gray-400"},
-    {time: "6 PM", color: "bg-gray-400"},
-]
+export const timeline: TimelineEvent[] = Array.from({length: 24}, (_, i) => {
+    if (i < 12) {
+        return {
+            time: `${i} AM`,
+            color: "bg-gray-400"
+        }
+    }
+    return {
+        time: `${i-12} PM`,
+        color: "bg-gray-400"
+    }
+})
+
+export const mockObjects: Data = [{
+    Key: "https://picsum.photos/id/1/1280/720",
+    LastModified: new Date(),
+    ETag: '"d41d8cd98f00b204e9800998ecf8427e"',
+    Size: 0,
+    StorageClass: "STANDARD",
+    ChecksumAlgorithm: [],
+    ChecksumType: ""
+}, {
+    Key: "https://picsum.photos/id/2/1280/720",
+    LastModified: new Date(),
+    ETag: '"d41d8cd98f00b204e9800998ecf8427e"',
+    Size: 0,
+    StorageClass: "STANDARD",
+    ChecksumAlgorithm: [],
+    ChecksumType: ""
+}, {
+    Key: "https://picsum.photos/id/3/1280/720",
+    LastModified: new Date(),
+    ETag: '"d41d8cd98f00b204e9800998ecf8427e"',
+    Size: 0,
+    StorageClass: "STANDARD",
+    ChecksumAlgorithm: [],
+    ChecksumType: ""
+}]

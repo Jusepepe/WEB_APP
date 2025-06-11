@@ -34,6 +34,9 @@ const createS3Client = (): S3Client => {
 }
 
 export function getPublicUrl(key: string): string {
+    if (key.startsWith("http") || key.startsWith("data")) {
+        return key;
+    }
     return `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${encodeURIComponent(key)}`;
 }
 

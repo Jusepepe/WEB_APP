@@ -4,7 +4,7 @@ import { useUserStore } from "../store/userStore";
 import { getPublicUrl } from "../utility/s3";
 import { useEffect } from "react";
 import type { Data } from "../utility/types";
-import { getDateAndHour } from "../utility/getDateAndHour";
+import { getDateAndHour } from "../utility/services/getDateAndHour";
 
 const baseUrl = import.meta.env.DEV 
       ? 'http://localhost:4321' 
@@ -31,7 +31,7 @@ export function ImageLayout() {
                 <h1 className="text-black font-semibold text-xl p-0">Imagenes</h1>
                 <div className="flex flex-row gap-2 overflow-x-scroll p-0 snap-x no-scrollbar snap-mandatory">
                     {objects.map((object) => (
-                        <ImageBox key={object.Key} src={getPublicUrl(object.Key)} name={tracePath.toString()} date={day.toDateString()} objectKey={object.Key} />
+                        <ImageBox key={object.Key} src={getPublicUrl(object.Key)} />
                     ))}
                 </div>
             </div>
