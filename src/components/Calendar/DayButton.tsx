@@ -1,27 +1,14 @@
-import { useUserStore } from "../store/userStore";
-import { useChangeDay } from "../utility/changeDay";
+import { useDay } from "../../utility/hooks/useDay";
+import type { DayButtonProps } from "../../utility/types";
 
 const dayNames = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'];
 
-type DayButtonProps = {
-    selected: boolean,
-    change: number
-}
-
 export function DayButton({ selected, change }: DayButtonProps) {
 
-    const { day } = useUserStore()
-    const changeDay = useChangeDay()
-    
-    const date = new Date(day)
-    date.setDate(date.getDate() + change)
-    const display = {
-        date: date.getDate(),
-        day: date.getDay()
-    }
+    const { handleDayButtonClick, display } = useDay({change})
 
     const handleClick = () => {
-        changeDay(change)
+        handleDayButtonClick()
     }
 
     return (

@@ -4,7 +4,7 @@ import type { Data } from "../utility/types";
 interface State {
     tracePath: number;
     selectedEvent: number;
-    day: Date;
+    day: Date | null;
     type: string;
     objects: Data;
 }
@@ -20,7 +20,7 @@ interface Actions{
 export const useUserStore = create<State & Actions>((set) => ({
     tracePath: -1,
     selectedEvent: -1,
-    day: new Date(),
+    day: null,
     type: "processed",
     objects: [],
     setSelectedTrace: (tracePath: number) => set({ tracePath: tracePath }),

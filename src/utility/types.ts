@@ -9,3 +9,8 @@ export type Object = {
     Size:              number;
     StorageClass:      string;
 }
+
+export type DayButtonProps = {
+    selected: boolean,
+    change: number,
+}

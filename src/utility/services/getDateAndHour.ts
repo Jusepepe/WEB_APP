@@ -6,6 +6,9 @@ export function getDateAndHour(day: Date, selectedEvent: number) {
 }
 
 function formatDateAndHour(day: Date, selectedEvent: number) {
+    if(day === null) {
+        return ["", ""]
+    }
     const date = day
     const year = date.getFullYear()
     const month = String(date.getMonth() + 1).padStart(2, '0')
