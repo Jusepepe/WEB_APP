@@ -10,7 +10,7 @@ export function ImageBarComp({handlePrev, handleNext}: {handlePrev: () => void, 
             <button onClick={handlePrev} className="rounded-full m-0 p-2 cursor-pointer hover:bg-black/50">
                 <LeftRowIcon/>
             </button>
-            <button className={`rounded-full m-0 p-2 cursor-pointer ${type === "processed" ? "bg-black/50" : ""}`} onClick={() => useUserStore.setState({ type: type === "processed" ? "raw" : "processed" })}>
+            <button className={`rounded-full m-0 p-2 cursor-pointer ${type === "processed" ? "bg-black/50 hover:VisibilityOnIcon" : "hover:VisibilityOffIcon"}`} onClick={() => useUserStore.setState({ type: type === "processed" ? "raw" : "processed" })}>
                 {type === "processed" ? <VisibilityOnIcon/> : <VisibilityOffIcon/>}
             </button>
             <button onClick={handleNext} className="rounded-full m-0 p-2 cursor-pointer hover:bg-black/50">

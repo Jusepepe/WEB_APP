@@ -2,30 +2,49 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ImageBox } from "./ImageBox";
 import { useUserStore } from "../../store/userStore";
 import { getPublicUrl } from "../../utility/s3";
-import { useEffect } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { ImageBarComp } from "./ImageBarComp";
 import { useS3 } from "../../utility/hooks/useS3";
+import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 
 export function ImageCarrousel() {
     const { day, tracePath, type, selectedEvent, objects } = useUserStore()
-    const [emblaRef, emblaApi] = useEmblaCarousel({loop: true , align: "center"});
+    const [emblaRef, emblaApi] = useEmblaCarousel({loop: true , align: "center"} as EmblaOptionsType);
     const { refreshS3Objects } = useS3()
 
-    useEffect(
-        refreshS3Objects,
-        [day, selectedEvent, type, tracePath]
-    )
+    const [slidesInView, setSlidesInView] = useState<number[]>([])
+
+    const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
+        setSlidesInView((slidesInView) => {
+            if (slidesInView.length === emblaApi.slideNodes().length) {
+                emblaApi.off('slidesInView', updateSlidesInView)
+            }
+            const inView = emblaApi
+            .slidesInView()
+            .filter((index) => !slidesInView.includes(index))
+
+            return slidesInView.concat(inView)
+        })
+      }, [emblaApi?.slideNodes()])
+
+    useEffect(() => {
+        if(!emblaApi) return
+
+        updateSlidesInView(emblaApi)
+        emblaApi.on('slidesInView', updateSlidesInView)
+        emblaApi.on('reInit', updateSlidesInView)
+
+        refreshS3Objects()
+    }, [day, selectedEvent, type, tracePath, emblaApi, updateSlidesInView])
 
     const scrollPrev = () => {
-        if (emblaApi) {
-            emblaApi.scrollPrev();
-        }
+        if (!emblaApi) return
+        emblaApi.scrollPrev();
     }
 
     const scrollNext = () => {
-        if (emblaApi) {
-            emblaApi.scrollNext();
-        }
+        if (!emblaApi) return
+        emblaApi.scrollNext();
     }
 
     return (
@@ -36,7 +55,7 @@ export function ImageCarrousel() {
             <div className="overflow-x-hidden" ref={emblaRef}>
                 <div className="flex flex-row">
                     {objects.map((object) => (
-                        <ImageBox key={object.Key} src={getPublicUrl(object.Key)} />
+                        <ImageBox key={object.Key} src={getPublicUrl(object.Key)} inView={slidesInView.includes(objects.indexOf(object))}/>
                     ))}
                 </div>
             </div>
