@@ -16,7 +16,7 @@ export function ImageBox({src, inView}: {src: string, inView: boolean}) {
     }, [inView, setHasLoaded])
 
     return (
-        <div className="relative group hover:cursor-pointer grow-0 shrink-0 basis-[90%] min-w-0 h-full pl-2 snap-center aspect-video">
+        <div className="relative group hover:cursor-pointer grow-0 shrink-0 basis-[90%] min-w-0 pl-2 snap-center aspect-video">
             {!hasLoaded && <LoadSpinner/>}
             <img className="rounded-lg w-full h-full inset-shadow-md" src={inView ? src : PLACEHOLDER_SRC} alt="" onLoad={setLoaded}/>
             <Rail selected={track+1}/>

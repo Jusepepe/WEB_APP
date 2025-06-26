@@ -6,6 +6,7 @@ import { useEffect, useCallback, useState } from "react";
 import { ImageBarComp } from "./ImageBarComp";
 import { useS3 } from "../../utility/hooks/useS3";
 import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
+import { LoadSpinner } from "../LoadSpinner";
 
 export function ImageCarrousel() {
     const { day, tracePath, type, selectedEvent, objects } = useUserStore()
@@ -53,11 +54,11 @@ export function ImageCarrousel() {
                 <p className="text-black font-semibold text-lg">Imagenes</p>
             </div>
             <div className="overflow-x-hidden" ref={emblaRef}>
-                <div className="flex flex-row">
+                {objects.length === 0 ? <div className="flex flex-row relative group hover:cursor-pointer grow-0 shrink-0 basis-[90%] min-w-0 mx-[5%] pl-2 snap-center aspect-video"><LoadSpinner/></div> : <div className="flex flex-row">
                     {objects.map((object) => (
                         <ImageBox key={object.Key} src={getPublicUrl(object.Key)} inView={slidesInView.includes(objects.indexOf(object))}/>
                     ))}
-                </div>
+                </div>}
             </div>
             <ImageBarComp handlePrev={scrollPrev} handleNext={scrollNext}/>
         </div>
