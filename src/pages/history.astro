@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import { LineGraph } from "../components/Charts/LineGraph.tsx";
+import { ScatterGraph } from "../components/Charts/ScatterGraph.tsx";
+import { PieGraph } from "../components/Charts/PieGraph.tsx";
+---
+
+<Layout>
+    <div class="flex flex-row justify-between w-full h-full gap-1.5 p-2">
+		<Sidebar/>
+        <article class="grid grid-cols-5 gap-1 w-full h-full bg-gray-100 rounded-lg py-2 px-4 overflow-y-auto no-scrollbar">
+            <div class="w-full h-full col-span-5">
+                <h1>Historial Anual</h1>
+            </div>
+            <div class="w-full h-full col-span-2">
+                <PieGraph height={400} client:load/>
+            </div>
+            <div class="w-full h-full col-span-3">
+                <ScatterGraph height={400} client:load/>
+            </div>
+            <div class="w-full h-full col-span-4">
+                <LineGraph height={400} client:load/>
+            </div>
+		</article>
+	</div>	
+</Layout>
