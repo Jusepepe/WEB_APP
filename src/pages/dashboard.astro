@@ -5,14 +5,25 @@ import { Timeline } from "../components/TimeComponents/Timeline.tsx";
 import { DaySlider } from "../components/Calendar/DaySlider.tsx";
 import { TracePicker } from "../components/TrackComponents/TracePicker.tsx";
 import { ImageCarrousel } from "../components/ImageComponents/ImageCarrousel.tsx";
+import { LineGraph } from "../components/Charts/LineGraph.tsx";
+import { ScatterGraph } from "../components/Charts/ScatterGraph.tsx";
+import { PieGraph } from "../components/Charts/PieGraph.tsx";
 ---
 
 <Layout>
 	<div class="flex flex-row justify-between w-full h-full gap-1.5 p-2">
 		<Sidebar/>
-		<article class="flex flex-col gap-2 w-[53%] h-full bg-gray-100 rounded-lg py-2 px-4 overflow-y-auto no-scrollbar">
+		<article class="flex flex-col gap-2 w-[53%] h-full bg-gray-100 rounded-lg py-2 px-4 overflow-y-auto overflow-x-hidden no-scrollbar">
 			<TracePicker client:load/>
 			<ImageCarrousel client:load/>
+			<div class="flex flex-col gap-2 w-[100%] bg-gray-200 p-2 rounded-lg">
+				<div class="flex flex-row justify-start">
+					<p class="text-black font-semibold text-lg">Gráficos</p>
+				</div>
+				<LineGraph client:load height={400}/>
+				<ScatterGraph client:load height={400}/>
+				<PieGraph client:load height={400}/>
+			</div>
 		</article>
 		<section class="flex flex-col gap-2 w-[27%] h-full bg-white p-2">
 			<DaySlider client:load/>
