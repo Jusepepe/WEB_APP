@@ -41,21 +41,18 @@ export function getPublicUrl(key: string): string {
 }
 
 async function listObjects(prefix: string): Promise<Object[]> {
-    const s3= createS3Client();
-    console.log(prefix)
+    const s3 = createS3Client();
     const command = new ListObjectsV2Command({
         Bucket: AWS_BUCKET_NAME,
         Prefix: prefix
     });
     try {
         const data = await s3.send(command);
-        console.log(data.Contents)
         if (!data.Contents) {
             return [];
         }
         return data.Contents;
     } catch (error) {
-        console.log(error);
         return [];
     }
 }
