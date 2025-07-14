@@ -61,3 +61,6 @@ export const listObjectsProcessed = (date: string, hour: string) => listObjects(
 export const listObjectsRaw = (date: string, hour: string) => listObjects(`${date}/raw/${hour}`)
 export const listObjectsProcessedbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/processed/${hour}/Track_${tracePath}`)
 export const listObjectsRawbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/raw/${hour}/Track_${tracePath}`)
+
+export const listObjectsDetection = (date: string, hour: string) => listObjects(`${date}/detection/${hour}`)
+export const listObjectsDetectionbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/detection/${hour}/Track_${tracePath}`)

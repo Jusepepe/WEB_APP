@@ -9,9 +9,9 @@ import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import { LoadSpinner } from "../LoadSpinner";
 
 export function ImageCarrousel() {
-    const { day, tracePath, type, selectedEvent, objects } = useUserStore()
+    const { day, tracePath, type, selectedEvent, images } = useUserStore()
     const [emblaRef, emblaApi] = useEmblaCarousel({loop: true , align: "center"} as EmblaOptionsType);
-    const { refreshS3Objects } = useS3()
+    const { refreshS3Images } = useS3()
 
     const [slidesInView, setSlidesInView] = useState<number[]>([])
 
@@ -35,7 +35,7 @@ export function ImageCarrousel() {
         emblaApi.on('slidesInView', updateSlidesInView)
         emblaApi.on('reInit', updateSlidesInView)
 
-        refreshS3Objects()
+        refreshS3Images()
     }, [day, selectedEvent, type, tracePath, emblaApi, updateSlidesInView])
 
     const scrollPrev = () => {
@@ -54,9 +54,9 @@ export function ImageCarrousel() {
                 <p className="text-black font-semibold text-lg">Imagenes</p>
             </div>
             <div className="overflow-x-hidden" ref={emblaRef}>
-                {objects.length === 0 ? <div className="flex flex-row relative group hover:cursor-pointer grow-0 shrink-0 basis-[90%] min-w-0 mx-[5%] pl-2 snap-center aspect-video"><LoadSpinner/></div> : <div className="flex flex-row">
-                    {objects.map((object) => (
-                        <ImageBox key={object.Key} src={getPublicUrl(object.Key)} inView={slidesInView.includes(objects.indexOf(object))}/>
+                {images.length === 0 ? <div className="flex flex-row relative group hover:cursor-pointer grow-0 shrink-0 basis-[90%] min-w-0 mx-[5%] pl-2 snap-center aspect-video"><LoadSpinner/></div> : <div className="flex flex-row">
+                    {images.map((image) => (
+                        <ImageBox key={image.Key} src={getPublicUrl(image.Key)} inView={slidesInView.includes(images.indexOf(image))}/>
                     ))}
                 </div>}
             </div>

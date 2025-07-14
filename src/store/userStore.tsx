@@ -6,7 +6,7 @@ interface State {
     selectedEvent: number;
     day: Date | null;
     type: string;
-    objects: Data;
+    images: Data;
 }
 
 interface Actions{
@@ -14,7 +14,7 @@ interface Actions{
     setSelectedEvent: (index: number) => void;
     setDay: (day: Date) => void;
     setType: (type: string) => void;
-    setObjects: (objects: Data) => void;
+    setImages: (images: Data) => void;
 }
 
 export const useUserStore = create<State & Actions>((set) => ({
@@ -22,10 +22,10 @@ export const useUserStore = create<State & Actions>((set) => ({
     selectedEvent: -1,
     day: null,
     type: "processed",
-    objects: [],
+    images: [],
     setSelectedTrace: (tracePath: number) => set({ tracePath: tracePath }),
     setSelectedEvent: (index: number) => set({ selectedEvent: index }),
     setDay: (day: Date) => set({ day: day }),
     setType: (type: string) => set({ type: type }),
-    setObjects: (objects: Data) => set({ objects: objects }),
+    setImages: (images: Data) => set({ images: images }),
 }))
