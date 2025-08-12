@@ -36,6 +36,7 @@ export function ImageCarrousel() {
         emblaApi.on('reInit', updateSlidesInView)
 
         refreshS3Images()
+        console.log(images)
     }, [day, selectedEvent, type, tracePath, emblaApi, updateSlidesInView])
 
     const scrollPrev = () => {

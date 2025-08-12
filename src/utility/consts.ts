@@ -8,7 +8,7 @@ type TimelineEvent = {
 export const imageUrls = Array.from({length: 24}, (_, i) => `https://picsum.photos/300/200?random=${i+1}`)
 
 export const timeline: TimelineEvent[] = Array.from({length: 24}, (_, i) => {
-    if (i < 12) {
+    if (i <= 12) {
         return {
             time: `${i} AM`,
             color: "bg-gray-400"

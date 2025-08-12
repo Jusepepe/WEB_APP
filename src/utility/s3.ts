@@ -62,5 +62,30 @@ export const listObjectsRaw = (date: string, hour: string) => listObjects(`${dat
 export const listObjectsProcessedbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/processed/${hour}/Track_${tracePath}`)
 export const listObjectsRawbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/raw/${hour}/Track_${tracePath}`)
 
-export const listObjectsDetection = (date: string, hour: string) => listObjects(`${date}/detection/${hour}`)
-export const listObjectsDetectionbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/detection/${hour}/Track_${tracePath}`)
+export const listObjectsDetection = (date: string, hour: string) => listObjects(`${date}/detections/${hour}`)
+/* export const listObjectsDetection = async (date: string, hour: string) => {
+    const s3 = createS3Client();
+    const command = new ListObjectsV2Command({
+        Bucket: AWS_BUCKET_NAME,
+        Prefix: `${date}/detections/${hour}`
+    });
+    try {
+        const { Contents } = await s3.send(command);
+        const allFiles = await Promise.all(
+            Contents?.map(async (file) => {
+              const response = await fetch(getPublicUrl(file?.Key!));
+              return {
+                key: file?.Key,
+                data: await response.json()
+              };
+            }) || []
+        );
+        if (!Contents) {
+            return [];
+        }
+        return allFiles;
+    } catch (error) {
+        return [];
+    }
+} */
+export const listObjectsDetectionbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/detections/${hour}/Track_${tracePath}`)

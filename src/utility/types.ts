@@ -14,3 +14,10 @@ export type DayButtonProps = {
     selected: boolean,
     change: number,
 }
+
+export type Detections = DetectionData[]
+
+export type DetectionData = {
+    Key: string;
+    data: any;
+}

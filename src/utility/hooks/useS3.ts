@@ -1,9 +1,9 @@
 import { useUserStore } from "../../store/userStore";
 import { getDateAndHour } from "../services/getDateAndHour";
-import { getS3Images } from "../services/s3Objects";
+import { getS3Images, getS3Detections } from "../services/s3Objects";
 
 export function useS3() {
-    const { tracePath, type, day, selectedEvent, setImages } = useUserStore()
+    const { tracePath, type, day, selectedEvent, setImages, setDetections } = useUserStore()
     const [date, hour] = getDateAndHour(day!, selectedEvent)
 
 
@@ -13,8 +13,15 @@ export function useS3() {
         })
     }
 
+    const refreshS3Detections = () => {
+        getS3Detections(tracePath, date, hour).then(detections => {
+            setDetections(detections)
+        })
+    }
+
     return {
-        refreshS3Images
+        refreshS3Images,
+        refreshS3Detections
     }
 
 }

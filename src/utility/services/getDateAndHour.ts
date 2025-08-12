@@ -15,8 +15,11 @@ function formatDateAndHour(day: Date, selectedEvent: number) {
     const dayNumber = String(date.getDate()).padStart(2, '0')
     const [hours, ampm] = timeline[selectedEvent].time.split(" ")
     const minutes = "00"
+    const ampmErrorFix = hours === "12" ? "PM" : ampm
     const formattedHours = ampm === "PM" ? String(Number(hours)+12) : String(Number(hours))
-    return [`${year}-${month}-${dayNumber}`, `${formattedHours}:${minutes}_${ampm}`]
+    const formattedHoursString = Number(formattedHours) < 10 ? `0${formattedHours}` : formattedHours
+    console.log(formattedHoursString, minutes, ampmErrorFix)
+    return [`${year}-${month}-${dayNumber}`, `${formattedHoursString}:${minutes}_${ampmErrorFix}`]
 }
 
 
