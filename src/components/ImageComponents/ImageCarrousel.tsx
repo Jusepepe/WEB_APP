@@ -1,53 +1,20 @@
-import useEmblaCarousel from "embla-carousel-react";
 import { ImageBox } from "./ImageBox";
 import { useUserStore } from "../../store/userStore";
 import { getPublicUrl } from "../../utility/s3";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect } from "react";
 import { ImageBarComp } from "./ImageBarComp";
 import { useS3 } from "../../utility/hooks/useS3";
-import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import { LoadSpinner } from "../LoadSpinner";
+import { useImageCarousel } from "../../utility/hooks/useImageCarousel";
 
 export function ImageCarrousel() {
     const { day, tracePath, type, selectedEvent, images } = useUserStore()
-    const [emblaRef, emblaApi] = useEmblaCarousel({loop: true , align: "center"} as EmblaOptionsType);
     const { refreshS3Images } = useS3()
-
-    const [slidesInView, setSlidesInView] = useState<number[]>([])
-
-    const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
-        setSlidesInView((slidesInView) => {
-            if (slidesInView.length === emblaApi.slideNodes().length) {
-                emblaApi.off('slidesInView', updateSlidesInView)
-            }
-            const inView = emblaApi
-            .slidesInView()
-            .filter((index) => !slidesInView.includes(index))
-
-            return slidesInView.concat(inView)
-        })
-      }, [emblaApi?.slideNodes()])
+    const { emblaRef, scrollPrev, scrollNext, slidesInView } = useImageCarousel();
 
     useEffect(() => {
-        if(!emblaApi) return
-
-        updateSlidesInView(emblaApi)
-        emblaApi.on('slidesInView', updateSlidesInView)
-        emblaApi.on('reInit', updateSlidesInView)
-
         refreshS3Images()
-        console.log(images)
-    }, [day, selectedEvent, type, tracePath, emblaApi, updateSlidesInView])
-
-    const scrollPrev = () => {
-        if (!emblaApi) return
-        emblaApi.scrollPrev();
-    }
-
-    const scrollNext = () => {
-        if (!emblaApi) return
-        emblaApi.scrollNext();
-    }
+    }, [day, selectedEvent, type, tracePath])
 
     return (
         <div className="relative flex flex-col gap-2 w-[100%] bg-gray-300 p-1.5 rounded-lg">
