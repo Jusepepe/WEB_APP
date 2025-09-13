@@ -2,7 +2,7 @@ import { useUserStore } from "../../store/userStore.tsx";
 import { TracePickerButton } from "./TracePickerButton.tsx";
 
 export function TracePicker() {
-    const { setSelectedTrace, tracePath } = useUserStore()
+    const { setSelectedTrace, tracePath } = useUserStore(store => ({setSelectedTrace: store.setSelectedTrace, tracePath: store.tracePath}))
     
     const handleClick = (id : number) => {
         setSelectedTrace(id)

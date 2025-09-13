@@ -3,7 +3,7 @@ import type { Data, Detections } from "../utility/types";
 
 interface State {
     tracePath: number;
-    selectedEvent: number;
+    selectedEvent: string;
     day: Date | null;
     type: string;
     images: Data;
@@ -12,7 +12,7 @@ interface State {
 
 interface Actions{
     setSelectedTrace: (tracePath: number) => void;
-    setSelectedEvent: (index: number) => void;
+    setSelectedEvent: (index: string) => void;
     setDay: (day: Date) => void;
     setType: (type: string) => void;
     setImages: (images: Data) => void;
@@ -21,13 +21,13 @@ interface Actions{
 
 export const useUserStore = create<State & Actions>((set) => ({
     tracePath: -1,
-    selectedEvent: -1,
+    selectedEvent: "-1",
     day: null,
     type: "processed",
     images: [],
     detections: [],
     setSelectedTrace: (tracePath: number) => set({ tracePath: tracePath }),
-    setSelectedEvent: (index: number) => set({ selectedEvent: index }),
+    setSelectedEvent: (index: string) => set({ selectedEvent: index }),
     setDay: (day: Date) => set({ day: day }),
     setType: (type: string) => set({ type: type }),
     setImages: (images: Data) => set({ images: images }),

@@ -9,15 +9,26 @@ const PLACEHOLDER_SRC = `data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACA
 export function ImageBox({src, inView}: {src: string, inView: boolean}) {
 
     const url = decodeURIComponent(src)
-    let orientation = "front-left"
-    let angle = ""
+    let orientation = "front"
+    let parts: string[] = []
+    let fileName = ""
+    let tracePath = ""
+    let date = ""
+    let hour = ""
+    let type = ""
+    let fullName = ""
     try {
-        const direction = url.split("/")[url.split("/").length - 2]
-        const position = url.split("/")[url.split("/").length - 1].split("_")[1].split(".")[0].toLowerCase()
-        angle = url.split("/")[url.split("/").length - 1].split("_")[0]
-        orientation = direction + "-" + position
+        parts = url.split("/")
+        fileName = parts.at(-1)!
+        orientation = parts.at(-2)!
+        tracePath = parts.at(-3)!
+        hour = parts.at(-4)!
+        type = parts.at(-5)!
+        date = parts.at(-6)!
+        fullName = `${date}/${type}/${hour}/${tracePath}/${orientation}/${fileName}`
+
     } catch (error) {
-        
+        console.error(error)
     }
 
     const [hasLoaded, setHasLoaded] = useState(false)
@@ -29,12 +40,12 @@ export function ImageBox({src, inView}: {src: string, inView: boolean}) {
     return (
         <div className="relative group hover:cursor-pointer grow-0 shrink-0 basis-[90%] min-w-0 pl-2 snap-center aspect-video">
             {!hasLoaded && <LoadSpinner/>}
+            <p className="absolute top-2 left-5 text-black text-xs font-semibold">{fullName}</p>
             <img className="rounded-lg w-full h-full inset-shadow-md" src={inView ? src : PLACEHOLDER_SRC} alt="" onLoad={setLoaded}/>
-            <Rail orientation={orientation}/>
+            {/*<Rail orientation={orientation}/>*/}
             <button className="absolute top-2 right-2 bg-black/50 backdrop-blur-xs rounded-lg p-1">
                 <ThreeDots/>
             </button>
-            <p className="absolute bottom-20 left-4 text-white text-xm">{angle}</p>
         </div>
     )
 }

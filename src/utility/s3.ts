@@ -40,6 +40,10 @@ export function getPublicUrl(key: string): string {
     return `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${encodeURIComponent(key)}`;
 }
 
+export function getThumbnailUrl(date: string, hour: string): string {
+    return `https://${AWS_BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com/${encodeURIComponent(`${date}/raw/${hour}/Track_1/front/thumbnail.png`)}`;
+}
+
 async function listObjects(prefix: string): Promise<Object[]> {
     const s3 = createS3Client();
     const command = new ListObjectsV2Command({
@@ -57,6 +61,7 @@ async function listObjects(prefix: string): Promise<Object[]> {
     }
 }
 
+export const listObjectsbyDate = async (date: string) => listObjects(`${date}`)
 export const listObjectsProcessed = (date: string, hour: string) => listObjects(`${date}/processed/${hour}`)
 export const listObjectsRaw = (date: string, hour: string) => listObjects(`${date}/raw/${hour}`)
 export const listObjectsProcessedbyTracePath = (date: string, hour: string, tracePath: number) => listObjects(`${date}/processed/${hour}/Track_${tracePath}`)

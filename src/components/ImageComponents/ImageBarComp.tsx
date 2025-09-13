@@ -4,7 +4,7 @@ import { VisibilityOffIcon, VisibilityOnIcon } from "../../assets/icons/Visibili
 import { useUserStore } from "../../store/userStore";
 
 export function ImageBarComp({handlePrev, handleNext}: {handlePrev: () => void, handleNext: () => void}) {
-    const { type } = useUserStore()
+    const { type } = useUserStore(store => ({type: store.type}))
     return (
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[70%] flex flex-row justify-between gap-2 bg-black/50 backdrop-blur-xs p-2 rounded-full">
             <button onClick={handlePrev} className="rounded-full m-0 p-2 cursor-pointer hover:bg-black/50">

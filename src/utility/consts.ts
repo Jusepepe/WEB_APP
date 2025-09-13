@@ -1,9 +1,4 @@
-import type { Data } from "./types"
-
-type TimelineEvent = {
-    time: string,
-    color: string
-}
+import type { Data, TimelineEvent } from "./types"
 
 export const imageUrls = Array.from({length: 24}, (_, i) => `https://picsum.photos/300/200?random=${i+1}`)
 

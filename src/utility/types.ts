@@ -21,3 +21,8 @@ export type DetectionData = {
     Key: string;
     data: any;
 }
+
+export type TimelineEvent = {
+    time: string,
+    color: string
+}

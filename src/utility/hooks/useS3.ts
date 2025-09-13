@@ -1,27 +1,36 @@
+import { useEffect } from "react";
 import { useUserStore } from "../../store/userStore";
-import { getDateAndHour } from "../services/getDateAndHour";
+import { formatDateAndHour } from "../services/getDateAndHour";
 import { getS3Images, getS3Detections } from "../services/s3Objects";
 
 export function useS3() {
-    const { tracePath, type, day, selectedEvent, setImages, setDetections } = useUserStore()
-    const [date, hour] = getDateAndHour(day!, selectedEvent)
-
+    const { type, tracePath, day, selectedEvent, setImages, setDetections } = useUserStore(store => ({
+        type: store.type,
+        tracePath: store.tracePath,
+        day: store.day,
+        selectedEvent: store.selectedEvent,
+        setImages: store.setImages,
+        setDetections: store.setDetections
+    }))
 
     const refreshS3Images = () => {
+        const [date, hour] = formatDateAndHour(day!, selectedEvent)
         getS3Images(type, tracePath, date, hour).then(images => {
             setImages(images)
         })
     }
 
-    const refreshS3Detections = () => {
+    const refreshS3Detections = (tracePath: number, date: string, hour: string) => {
         getS3Detections(tracePath, date, hour).then(detections => {
             setDetections(detections)
         })
     }
 
-    return {
-        refreshS3Images,
-        refreshS3Detections
-    }
+    useEffect(() => {
+        if(day === null || selectedEvent === "-1") {
+            return
+        }
+        refreshS3Images()
+    }, [type, tracePath, selectedEvent])
 
 }
