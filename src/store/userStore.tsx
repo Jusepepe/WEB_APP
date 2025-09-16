@@ -23,7 +23,7 @@ export const useUserStore = create<State & Actions>((set) => ({
     tracePath: -1,
     selectedEvent: "-1",
     day: null,
-    type: "processed",
+    type: "raw",
     images: [],
     detections: [],
     setSelectedTrace: (tracePath: number) => set({ tracePath: tracePath }),

@@ -10,7 +10,6 @@ export function ImageCarrousel() {
     const { images } = useUserStore(store => ({ images: store.images }))
     const { emblaRef, scrollPrev, scrollNext, slidesInView } = useImageCarousel();
 
-    // Triggers S3 refresh via its own internal effect when store values change
     useS3()
 
     return (
