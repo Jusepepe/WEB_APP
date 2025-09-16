@@ -24,7 +24,7 @@ export default defineConfig({
     afterSignInUrl: "/dashboard",
     afterSignUpUrl: "/dashboard",
   }), react()],
-  adapter: vercel(),
+  adapter: node({ mode: "standalone"}),
   output: "server",
 
 });
